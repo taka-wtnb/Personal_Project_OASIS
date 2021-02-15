@@ -10,7 +10,7 @@
   .logo-container {
     display: flex;
     align-items: center;
-    width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+    width: auto; //calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
   }
 
   nb-action {
@@ -44,7 +44,8 @@
 
     .logo {
       padding: 0 1.25rem;
-      font-size: 1.75rem;
+      font-size: 2.25rem; //1.75rem;
+      font-weight: bolder;
       @include nb-ltr(border-left, 1px solid nb-theme(divider-color));
       @include nb-rtl(border-right, 1px solid nb-theme(divider-color));
       white-space: nowrap;
@@ -62,9 +63,23 @@
     }
   }
 
+  @include media-breakpoint-down(lg) {
+    .control-app-name {
+      display: none;
+    }
+  }
+
   @include media-breakpoint-down(is) {
     nb-select {
       display: none;
     }
+  }
+
+  #small-font {
+    font-size: 1.25rem;
+  }
+
+  #logo-color {
+    color: #ff8c00;
   }
 }
