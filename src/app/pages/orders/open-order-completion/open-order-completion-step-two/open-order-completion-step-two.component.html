@@ -1,0 +1,54 @@
+<div *ngIf="op;else other_content">
+    {{ op.order_id }} | {{ op.supplier_code }} | {{ op.item_num }} | {{ op.item_name }} | 
+    {{ op.unit_price }} | {{ op.qty }} | {{ op.unit }} | 
+    {{ op.order_date | date: 'MMM d, y' }} | {{ op.promise_date | date: 'MMM d, y' }}
+    
+    <div class="row">
+        <div class="col-md-12 col-lg-4 col-xxxl-4">
+          <nb-card>
+            <nb-card-header>Select a Receiving Date</nb-card-header>
+            <nb-card-body>
+              <input #pickedDate nbInput placeholder="Click Here to Pick a Date" [nbDatepicker]="picker">
+              <nb-datepicker #picker [min]="min" [max]="max"></nb-datepicker>
+            </nb-card-body>
+          </nb-card>
+        </div>
+    </div>
+
+    <div *ngIf="pickedDate.value | date: 'y-MM-dd' as formattedDate">
+      <div *ngIf="(pickedDate.value | date: 'y/MM/dd') > (op.promise_date | date: 'y/MM/dd');else onTime">
+        <div class="col-lg-6">
+          <nb-card>
+            <nb-card-header>Delayed Delivery - Please specify the delay reason.</nb-card-header>
+            <nb-card-body>
+              <!-- <div *ngIf="isisDelayReasonUndefined"> You must select the reason! </div> -->
+              <nb-select placeholder="Select a Delay Reason" [(selected)]="delayReason">
+                <nb-option *ngFor="let reason of delayReasons" [value]="reason.id">{{ reason.reason }}</nb-option>
+              </nb-select>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        {{ delayReason}}
+        {{ formattedDate}}
+        <div class="form-group row">
+          <div class="offset-sm-3 col-sm-9">
+            <button type="submit" nbButton status="primary" (click)="addDelay(op.order_id, formattedDate, delayReason);">
+              Close the Open Order
+            </button>
+          </div>
+        </div>
+      </div>
+      <ng-template #onTime>
+        <div class="form-group row">
+          <div class="offset-sm-3 col-sm-9">
+            <button type="submit" nbButton status="primary" (click)="closeOpenOrder(op.order_id, formattedDate);">
+              Close the Open Order
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    
+</div>
+
+<ng-template #other_content>No Data</ng-template>

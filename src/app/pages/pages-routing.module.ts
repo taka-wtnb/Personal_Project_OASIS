@@ -5,6 +5,8 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { OpenOrderCompletionStepOneComponent } from './orders/open-order-completion/open-order-completion-step-one/open-order-completion-step-one.component';
+import { OpenOrderCompletionStepTwoComponent } from './orders/open-order-completion/open-order-completion-step-two/open-order-completion-step-two.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +19,14 @@ const routes: Routes = [{
     {
       path: 'iot-dashboard',
       component: DashboardComponent,
+    },
+    {
+      path: 'open-order-completion-step-one',
+      component: OpenOrderCompletionStepOneComponent,
+    },
+    {
+      path: 'open-order-completion-step-two',
+      component: OpenOrderCompletionStepTwoComponent,
     },
     {
       path: 'layout',
