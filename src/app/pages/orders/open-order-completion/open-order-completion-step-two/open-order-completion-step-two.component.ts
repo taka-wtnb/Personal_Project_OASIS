@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { NbDateService } from '@nebular/theme';
 import { DelayReason } from '../../delay-reason';
-import { OnTimeDeliveryDTO } from '../../on-time-delivery';
+import { OnTimeDeliveryDTO } from '../../on-time-delivery-dto';
 // import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OpenOrder } from '../../open-order';
 import { OrdersService } from '../../orders.service';
+import { DelayEntryDTO } from '../../delay-entry-dto';
 
 @Component({
   selector: 'ngx-open-order-completion-step-two',
@@ -22,10 +24,12 @@ export class OpenOrderCompletionStepTwoComponent implements OnInit {
   delayReasons: DelayReason[] = [];
   isDelayReasonUndefined: boolean = false;
   otd: OnTimeDeliveryDTO;
+  delayEntry: DelayEntryDTO;
 
   constructor(
     private ordersService: OrdersService,
-    protected dateService: NbDateService<Date>
+    protected dateService: NbDateService<Date>,
+    private _location: Location
   ) {}
 
   ngOnInit(): void {
@@ -48,14 +52,23 @@ export class OpenOrderCompletionStepTwoComponent implements OnInit {
   }
 
   addDelay(orderId: string, pickedDate: string, delayReason: string): void {
-    console.log("Date: " + pickedDate + ", Reason: " + delayReason);
-    this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, true);
+    // console.log("Date: " + pickedDate + ", Reason: " + delayReason);
+    if(delayReason === undefined) {
+      console.log("Please specify the delay reason.");
+    } else {
+      this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, true);
+      this.delayEntry = new DelayEntryDTO(orderId, delayReason);
+      this.ordersService.addOpenOrderCompletion(this.otd);
+      this.ordersService.addDelayEntry(this.delayEntry);
+      this._location.back();
+    }
   }
 
   closeOpenOrder(orderId: string, pickedDate: string): void {
-    console.log("Order ID: " + orderId + ", Date: " + pickedDate);
+    // console.log("Order ID: " + orderId + ", Date: " + pickedDate);
     this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, false);
     this.ordersService.addOpenOrderCompletion(this.otd);
+    this._location.back();
   }
   
 }

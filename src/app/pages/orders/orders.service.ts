@@ -7,7 +7,8 @@ import { catchError } from 'rxjs/operators';
 import { OpenOrder } from './open-order';
 import { Subject } from 'rxjs';
 import { DelayReason } from './delay-reason';
-import { OnTimeDeliveryDTO } from './on-time-delivery';
+import { OnTimeDeliveryDTO } from './on-time-delivery-dto';
+import { DelayEntryDTO } from './delay-entry-dto';
 
 
 @Injectable({
@@ -25,6 +26,7 @@ export class OrdersService {
   private allOpenOrdersUrl = 'http://localhost:3002/allopenorders/'; 
   private delayReasonsUrl = 'http://localhost:3002/delayReasons/'; 
   private openOrderCompletionUrl = 'http://localhost:3002/openordercompletion/';
+  private delayEntryUrl = 'http://localhost:3002/delayentry/';
 
   constructor(private http: HttpClient) { }
 
@@ -57,6 +59,11 @@ export class OrdersService {
 
   addOpenOrderCompletion(otd: OnTimeDeliveryDTO) {
     this.http.post(this.openOrderCompletionUrl, otd)
+      .subscribe(response => { console.log(response); });
+  }
+
+  addDelayEntry(delayEntry: DelayEntryDTO) {
+    this.http.post(this.delayEntryUrl, delayEntry)
       .subscribe(response => { console.log(response); });
   }
 
