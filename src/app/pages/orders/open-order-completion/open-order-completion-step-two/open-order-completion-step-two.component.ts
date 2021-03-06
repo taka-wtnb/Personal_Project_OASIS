@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { NbDateService } from '@nebular/theme';
 import { DelayReason } from '../../delay-reason';
 import { OnTimeDeliveryDTO } from '../../on-time-delivery-dto';
-// import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { OpenOrder } from '../../open-order';
 import { OrdersService } from '../../orders.service';
 import { DelayEntryDTO } from '../../delay-entry-dto';
@@ -29,7 +29,8 @@ export class OpenOrderCompletionStepTwoComponent implements OnInit {
   constructor(
     private ordersService: OrdersService,
     protected dateService: NbDateService<Date>,
-    private _location: Location
+    private _location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -54,13 +55,14 @@ export class OpenOrderCompletionStepTwoComponent implements OnInit {
   addDelay(orderId: string, pickedDate: string, delayReason: string): void {
     // console.log("Date: " + pickedDate + ", Reason: " + delayReason);
     if(delayReason === undefined) {
-      console.log("Please specify the delay reason.");
+      console.log('Please specify the delay reason.');
     } else {
       this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, true);
       this.delayEntry = new DelayEntryDTO(orderId, delayReason);
       this.ordersService.addOpenOrderCompletion(this.otd);
       this.ordersService.addDelayEntry(this.delayEntry);
-      this._location.back();
+      // this._location.back();
+      this.router.navigateByUrl('/pages/open-order-completion-step-one');
     }
   }
 
@@ -68,7 +70,8 @@ export class OpenOrderCompletionStepTwoComponent implements OnInit {
     // console.log("Order ID: " + orderId + ", Date: " + pickedDate);
     this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, false);
     this.ordersService.addOpenOrderCompletion(this.otd);
-    this._location.back();
+    // this._location.back();
+    this.router.navigateByUrl('/pages/open-order-completion-step-one');
   }
   
 }
