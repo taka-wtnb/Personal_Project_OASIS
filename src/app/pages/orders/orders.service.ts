@@ -30,10 +30,10 @@ export class OrdersService {
 
   constructor(private http: HttpClient) { }
 
-  setOpenOrders(openOrders: OpenOrder[]) {
-    this.openOrders = openOrders;
-    this.openOrderChanged.next(this.openOrders.slice());
-  }
+  // setOpenOrders(openOrders: OpenOrder[]) {
+  //   this.openOrders = openOrders;
+  //   this.openOrderChanged.next(this.openOrders.slice());
+  // }
 
   /** GET open orders from the server */
   getOpenOrders(): Observable<OpenOrder[]> {

@@ -7,6 +7,7 @@ import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { OpenOrderCompletionStepOneComponent } from './orders/open-order-completion/open-order-completion-step-one/open-order-completion-step-one.component';
 import { OpenOrderCompletionStepTwoComponent } from './orders/open-order-completion/open-order-completion-step-two/open-order-completion-step-two.component';
+import { OpenOrderCompletionStepThreeComponent } from './orders/open-order-completion/open-order-completion-step-three/open-order-completion-step-three.component';
 
 const routes: Routes = [{
   path: '',
@@ -27,6 +28,10 @@ const routes: Routes = [{
     {
       path: 'open-order-completion-step-two',
       component: OpenOrderCompletionStepTwoComponent,
+    },
+    {
+      path: 'open-order-completion-step-three',
+      component: OpenOrderCompletionStepThreeComponent,
     },
     {
       path: 'layout',

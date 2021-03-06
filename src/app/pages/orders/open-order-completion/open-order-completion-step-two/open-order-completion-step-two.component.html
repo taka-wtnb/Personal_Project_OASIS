@@ -21,7 +21,6 @@
           <nb-card>
             <nb-card-header>Delayed Delivery - Please specify the delay reason.</nb-card-header>
             <nb-card-body>
-              <!-- <div *ngIf="isisDelayReasonUndefined"> You must select the reason! </div> -->
               <nb-select placeholder="Select a Delay Reason" [(selected)]="delayReason">
                 <nb-option *ngFor="let reason of delayReasons" [value]="reason.id">{{ reason.reason }}</nb-option>
               </nb-select>
@@ -50,4 +49,4 @@
     </div>
 </div>
 
-<ng-template #other_content>No Data</ng-template>
+<ng-template #other_content>No Data - Please Select an Open Order to Complete at the Step One</ng-template>

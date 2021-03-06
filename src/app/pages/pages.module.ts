@@ -12,6 +12,7 @@ import { OrderEntryStepOneComponent } from './orders/order-entry/order-entry-ste
 import { OrderEntryStepTwoComponent } from './orders/order-entry/order-entry-step-two/order-entry-step-two.component';
 import { OpenOrderCompletionStepOneComponent } from './orders/open-order-completion/open-order-completion-step-one/open-order-completion-step-one.component';
 import { OpenOrderCompletionStepTwoComponent } from './orders/open-order-completion/open-order-completion-step-two/open-order-completion-step-two.component';
+import { OpenOrderCompletionStepThreeComponent } from './orders/open-order-completion/open-order-completion-step-three/open-order-completion-step-three.component';
 import { FormsRoutingModule } from './forms/forms-routing.module';
 
 @NgModule({
@@ -46,6 +47,7 @@ import { FormsRoutingModule } from './forms/forms-routing.module';
     OrderEntryStepTwoComponent,
     OpenOrderCompletionStepOneComponent,
     OpenOrderCompletionStepTwoComponent,
+    OpenOrderCompletionStepThreeComponent,
   ],
 })
 export class PagesModule {
