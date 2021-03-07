@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+      <nb-card>
+        <nb-card-body>
+          <h2 class="title">Order #{{ orderId }}'s quality issue has been reported!</h2>
+          <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
+            <button nbButton fullWidth (click)="goBackToStepOne()" type="button" class="home-button">
+                Report Another Quality Issue
+            </button>
+            <div class="or-text">OR</div>
+            <button nbButton fullWidth (click)="goToHome()" type="button" class="home-button">
+                Go Back To Home
+            </button>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+</div>

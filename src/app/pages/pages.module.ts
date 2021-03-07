@@ -4,8 +4,10 @@ import { FormsModule as ngFormsModule } from '@angular/forms';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
+import { HomepageComponent } from './home/homepage/homepage.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
+import { FormsRoutingModule } from './forms/forms-routing.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { OrderEntryStepOneComponent } from './orders/order-entry/order-entry-step-one/order-entry-step-one.component';
@@ -13,7 +15,12 @@ import { OrderEntryStepTwoComponent } from './orders/order-entry/order-entry-ste
 import { OpenOrderCompletionStepOneComponent } from './orders/open-order-completion/open-order-completion-step-one/open-order-completion-step-one.component';
 import { OpenOrderCompletionStepTwoComponent } from './orders/open-order-completion/open-order-completion-step-two/open-order-completion-step-two.component';
 import { OpenOrderCompletionStepThreeComponent } from './orders/open-order-completion/open-order-completion-step-three/open-order-completion-step-three.component';
-import { FormsRoutingModule } from './forms/forms-routing.module';
+import { QualityIssueEntryStepOneComponent } from './quality-issues/quality-issue-entry/quality-issue-entry-step-one/quality-issue-entry-step-one.component';
+import { QualityIssueEntryStepTwoComponent } from './quality-issues/quality-issue-entry/quality-issue-entry-step-two/quality-issue-entry-step-two.component';
+import { QualityIssueClosingStepOneComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-one/quality-issue-closing-step-one.component';
+import { QualityIssueClosingStepTwoComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-two/quality-issue-closing-step-two.component';
+import { QualityIssueEntryStepThreeComponent } from './quality-issues/quality-issue-entry/quality-issue-entry-step-three/quality-issue-entry-step-three.component';
+import { QualityIssueClosingStepThreeComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-three/quality-issue-closing-step-three.component';
 
 @NgModule({
   imports: [
@@ -48,6 +55,13 @@ import { FormsRoutingModule } from './forms/forms-routing.module';
     OpenOrderCompletionStepOneComponent,
     OpenOrderCompletionStepTwoComponent,
     OpenOrderCompletionStepThreeComponent,
+    QualityIssueEntryStepOneComponent,
+    QualityIssueEntryStepTwoComponent,
+    HomepageComponent,
+    QualityIssueClosingStepOneComponent,
+    QualityIssueClosingStepTwoComponent,
+    QualityIssueEntryStepThreeComponent,
+    QualityIssueClosingStepThreeComponent,
   ],
 })
 export class PagesModule {

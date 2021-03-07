@@ -1,0 +1,9 @@
+<h3>Pending Quality Issues</h3>
+<div>
+    <li *ngFor="let issue of pendingQualityIssues" >
+        <button  [routerLink]="['../quality-issue-closing-step-two']" (click)="onSelectedPendingQualityIssue(issue)">Close Issue</button>
+        {{ issue.order_id }} | {{ issue.supplier_code }} | {{ issue.item_num }} | 
+        {{ issue.item_name }} | {{ issue.category }} | {{ issue.date_detected | date: 'MMM d, y' }}
+        <!-- <button  [routerLink]="['../open-order-completion-step-two', controlId ]">Receive</button> -->
+    </li>
+</div>

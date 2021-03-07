@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { OpenOrder } from './open-order';
-import { Subject } from 'rxjs';
 import { DelayReason } from './delay-reason';
 import { OnTimeDeliveryDTO } from './on-time-delivery-dto';
 import { DelayEntryDTO } from './delay-entry-dto';
@@ -17,11 +16,11 @@ import { DelayEntryDTO } from './delay-entry-dto';
 export class OrdersService {
 
   private openOrders: OpenOrder[] = [];
-  private openOrderChanged = new Subject<OpenOrder[]>();
+  private openOrdersChanged = new Subject<OpenOrder[]>();
   private selectedOpenOrder: OpenOrder;
-  private selectedOrderChanged = new Subject<OpenOrder>();
+  private selectedOpenOrderChanged = new Subject<OpenOrder>();
   private delayReasons: DelayReason[] = [];
-  private delayReasonChanged = new Subject<DelayReason[]>();
+  private delayReasonsChanged = new Subject<DelayReason[]>();
 
   private allOpenOrdersUrl = 'http://localhost:3002/allopenorders/'; 
   private delayReasonsUrl = 'http://localhost:3002/delayReasons/'; 
@@ -30,10 +29,10 @@ export class OrdersService {
 
   constructor(private http: HttpClient) { }
 
-  // setOpenOrders(openOrders: OpenOrder[]) {
-  //   this.openOrders = openOrders;
-  //   this.openOrderChanged.next(this.openOrders.slice());
-  // }
+  setOpenOrders(openOrders: OpenOrder[]) {
+    this.openOrders = openOrders;
+    this.openOrdersChanged.next(this.openOrders.slice());
+  }
 
   /** GET open orders from the server */
   getOpenOrders(): Observable<OpenOrder[]> {
@@ -44,7 +43,7 @@ export class OrdersService {
 
   setOpenOrder(openOrder: OpenOrder) {
     this.selectedOpenOrder = openOrder; 
-    this.selectedOrderChanged.next(this.selectedOpenOrder);
+    this.selectedOpenOrderChanged.next(this.selectedOpenOrder);
   }
 
   getOpenOrder() {

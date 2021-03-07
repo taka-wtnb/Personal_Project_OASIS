@@ -1,0 +1,41 @@
+<div *ngIf="cp;else other_content">
+    {{ cp.order_id }} | {{ cp.supplier_code }} | {{ cp.item_num }} | {{ cp.item_name }} | 
+    {{ cp.unit_price }} | {{ cp.qty }} | {{ cp.unit }} | 
+    {{ cp.order_date | date: 'MMM d, y' }} | {{ cp.delivery_date | date: 'MMM d, y' }}
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <nb-card>
+              <nb-card-header>Please Specify a Quality Issue Type</nb-card-header>
+              <nb-card-body>
+                <nb-select placeholder="Select a Quality Issue Type" [(selected)]="qualityIssueType">
+                  <nb-option *ngFor="let type of qualityIssueCategories" [value]="type.id">{{ type.category }}</nb-option>
+                </nb-select>
+              </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+
+    <div *ngIf="qualityIssueType">
+        <div class="col-md-12 col-lg-4 col-xxxl-4">
+            <nb-card>
+              <nb-card-header>Select a Reporting Date</nb-card-header>
+              <nb-card-body>
+                <input #reportedDate nbInput placeholder="Click Here to Pick a Date" [nbDatepicker]="picker">
+                <nb-datepicker #picker [min]="min" [max]="max"></nb-datepicker>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        <div *ngIf="reportedDate.value | date: 'y-MM-dd' as formattedDate">
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+              <button type="submit" nbButton status="primary" (click)="addQualityIssue(cp.order_id, qualityIssueType, formattedDate);">
+                Report the Quality Issue
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #other_content>No Data - Please Select a Closed Order to Report a Quality Issue at Step One</ng-template>
