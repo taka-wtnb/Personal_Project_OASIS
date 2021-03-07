@@ -24,11 +24,11 @@ export class QualityIssuesService {
   private selectedPendingQualityIssue: PendingQualityIssue;
   private selectedPendingQualityIssueChanged = new Subject<PendingQualityIssue>();
 
-  private closedOrdersUrl = 'http://localhost:3002/closedorders/'; 
-  private qualityIssueCategoriesUrl = 'http://localhost:3002/qualityissuecategories/'; 
-  private qualityIssueEntryUrl = 'http://localhost:3002/qualityissueentry/';
-  private pendingQualityIssuesUrl = 'http://localhost:3002/pendingqualityissues/'; 
-  private qualityIssueClosingUrl = 'http://localhost:3002/qualityissueclosing/';
+  private closedOrdersUrl = 'https://quiet-reaches-22008.herokuapp.com/closedorders/'; 
+  private qualityIssueCategoriesUrl = 'https://quiet-reaches-22008.herokuapp.com/qualityissuecategories/'; 
+  private qualityIssueEntryUrl = 'https://quiet-reaches-22008.herokuapp.com/qualityissueentry/';
+  private pendingQualityIssuesUrl = 'https://quiet-reaches-22008.herokuapp.com/pendingqualityissues/'; 
+  private qualityIssueClosingUrl = 'https://quiet-reaches-22008.herokuapp.com/qualityissueclosing/';
   
   constructor(private http: HttpClient) { }
   

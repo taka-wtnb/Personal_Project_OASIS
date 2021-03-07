@@ -22,10 +22,10 @@ export class OrdersService {
   private delayReasons: DelayReason[] = [];
   private delayReasonsChanged = new Subject<DelayReason[]>();
 
-  private allOpenOrdersUrl = 'http://localhost:3002/allopenorders/'; 
-  private delayReasonsUrl = 'http://localhost:3002/delayReasons/'; 
-  private openOrderCompletionUrl = 'http://localhost:3002/openordercompletion/';
-  private delayEntryUrl = 'http://localhost:3002/delayentry/';
+  private allOpenOrdersUrl = 'https://quiet-reaches-22008.herokuapp.com/allopenorders/'; 
+  private delayReasonsUrl = 'https://quiet-reaches-22008.herokuapp.com/delayReasons/'; 
+  private openOrderCompletionUrl = 'https://quiet-reaches-22008.herokuapp.com/openordercompletion/';
+  private delayEntryUrl = 'https://quiet-reaches-22008.herokuapp.com/delayentry/';
 
   constructor(private http: HttpClient) { }
 
