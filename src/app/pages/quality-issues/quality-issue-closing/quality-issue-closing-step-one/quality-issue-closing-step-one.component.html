@@ -1,5 +1,5 @@
 <h3>Pending Quality Issues</h3>
-<div>
+<div *ngIf="pendingQualityIssues?.length > 0;else other_content">
     <li *ngFor="let issue of pendingQualityIssues" >
         <button  [routerLink]="['../quality-issue-closing-step-two']" (click)="onSelectedPendingQualityIssue(issue)">Close Issue</button>
         {{ issue.order_id }} | {{ issue.supplier_code }} | {{ issue.item_num }} | 
@@ -7,3 +7,5 @@
         <!-- <button  [routerLink]="['../open-order-completion-step-two', controlId ]">Receive</button> -->
     </li>
 </div>
+
+<ng-template #other_content>Currently, there is no pending quality issue in the database.</ng-template>

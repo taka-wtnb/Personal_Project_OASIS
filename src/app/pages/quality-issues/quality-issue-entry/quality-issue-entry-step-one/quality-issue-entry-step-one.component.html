@@ -1,5 +1,5 @@
 <h3>Closed Orders</h3>
-<div>
+<div *ngIf="closedOrders?.length > 0;else other_content">
     <li *ngFor="let order of closedOrders" >
         <button  [routerLink]="['../quality-issue-entry-step-two']" (click)="onSelectedClosedOrder(order)">Report</button>
         {{ order.order_id }} | {{ order.supplier_code }} | {{ order.item_num }} | {{ order.item_name }} | 
@@ -8,3 +8,5 @@
         <!-- <button  [routerLink]="['../open-order-completion-step-two', controlId ]">Receive</button> -->
     </li>
 </div>
+
+<ng-template #other_content>Currently, there is no closed order in the database.</ng-template>
