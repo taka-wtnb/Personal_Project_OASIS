@@ -4,7 +4,7 @@ import { NbDateService } from '@nebular/theme';
 import { ClosedOrder } from '../../closed-order';
 import { QualityIssueEntryDTO } from '../../quality-issue-entry-dto';
 import { QualityIssuesService } from '../../quality-issues.service';
-import { QualityIssueCategory } from '../../qualityIssueCategory';
+import { QualityIssueCategory } from '../../quality-issue-category';
 
 @Component({
   selector: 'ngx-quality-issue-entry-step-two',

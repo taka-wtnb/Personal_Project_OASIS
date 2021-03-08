@@ -8,7 +8,7 @@ import { ClosedOrder } from './closed-order';
 import { PendingQualityIssue } from './pending-quality-issue';
 import { QualityIssueClosingDTO } from './quality-issue-closing-dto';
 import { QualityIssueEntryDTO } from './quality-issue-entry-dto';
-import { QualityIssueCategory } from './qualityIssueCategory';
+import { QualityIssueCategory } from './quality-issue-category';
 
 @Injectable({
   providedIn: 'root'
