@@ -1,1 +1,10 @@
-<p>order-entry-step-one works!</p>
+<h3>Select an item to buy</h3>
+<div *ngIf="items?.length > 0;else other_content">
+    <li *ngFor="let item of items" >
+        <button  [routerLink]="['../order-entry-step-two']" (click)="onSelectedItem(item)">Select</button>
+        {{ item.item_num }} | {{ item.item_name }} | {{ item.item_type }} | {{ item.unit }}
+        <!-- <button  [routerLink]="['../open-order-completion-step-two', controlId ]">Receive</button> -->
+    </li>
+</div>
+
+<ng-template #other_content>Currently, there is no item in the database.</ng-template>

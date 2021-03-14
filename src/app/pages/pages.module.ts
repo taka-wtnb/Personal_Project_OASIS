@@ -12,14 +12,15 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { OrderEntryStepOneComponent } from './orders/order-entry/order-entry-step-one/order-entry-step-one.component';
 import { OrderEntryStepTwoComponent } from './orders/order-entry/order-entry-step-two/order-entry-step-two.component';
+import { OrderEntryStepThreeComponent } from './orders/order-entry/order-entry-step-three/order-entry-step-three.component';
 import { OpenOrderCompletionStepOneComponent } from './orders/open-order-completion/open-order-completion-step-one/open-order-completion-step-one.component';
 import { OpenOrderCompletionStepTwoComponent } from './orders/open-order-completion/open-order-completion-step-two/open-order-completion-step-two.component';
 import { OpenOrderCompletionStepThreeComponent } from './orders/open-order-completion/open-order-completion-step-three/open-order-completion-step-three.component';
 import { QualityIssueEntryStepOneComponent } from './quality-issues/quality-issue-entry/quality-issue-entry-step-one/quality-issue-entry-step-one.component';
 import { QualityIssueEntryStepTwoComponent } from './quality-issues/quality-issue-entry/quality-issue-entry-step-two/quality-issue-entry-step-two.component';
+import { QualityIssueEntryStepThreeComponent } from './quality-issues/quality-issue-entry/quality-issue-entry-step-three/quality-issue-entry-step-three.component';
 import { QualityIssueClosingStepOneComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-one/quality-issue-closing-step-one.component';
 import { QualityIssueClosingStepTwoComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-two/quality-issue-closing-step-two.component';
-import { QualityIssueEntryStepThreeComponent } from './quality-issues/quality-issue-entry/quality-issue-entry-step-three/quality-issue-entry-step-three.component';
 import { QualityIssueClosingStepThreeComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-three/quality-issue-closing-step-three.component';
 
 @NgModule({
@@ -62,6 +63,7 @@ import { QualityIssueClosingStepThreeComponent } from './quality-issues/quality-
     QualityIssueClosingStepTwoComponent,
     QualityIssueEntryStepThreeComponent,
     QualityIssueClosingStepThreeComponent,
+    OrderEntryStepThreeComponent,
   ],
 })
 export class PagesModule {

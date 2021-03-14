@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NbDateService } from '@nebular/theme';
+import { Item } from '../../../items/item';
+import { ItemsService } from '../../../items/items.service';
+import { Supplier } from '../../../suppliers/supplier';
+import { SuppliersService } from '../../../suppliers/suppliers.service';
+import { OrderEntryDTO } from '../../order-entry-dto';
+import { OrdersService } from '../../orders.service';
 
 @Component({
   selector: 'ngx-order-entry-step-two',
@@ -7,9 +16,84 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderEntryStepTwoComponent implements OnInit {
 
-  constructor() { }
+  item: Item;
+  itm: Item;
+  id: number;
+  min: Date;
+  // max: Date;
+  suppliers: Supplier[] = [];
+  // supplier: Supplier;
+
+  // selectedItem;
+  // delayReasons: DelayReason[] = [];
+  // isDelayReasonUndefined: boolean = false;
+  order: OrderEntryDTO;
+  // delayEntry: DelayEntryDTO;
+  dateNow: string;
+
+  constructor(
+    private orderService: OrdersService,
+    private itemsService: ItemsService,
+    private suppliersService: SuppliersService,
+    protected dateService: NbDateService<Date>,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.getSuppliers();
+    this.item = this.itemsService.getItem();
+    if(this.item !== undefined && this.item !== null) {
+      localStorage.setItem('itm', JSON.stringify(this.item));
+      this.itm = JSON.parse(localStorage.getItem('itm'));
+      this.min = this.dateService.addDay(new Date(), 0);
+      // this.max = this.dateService.addDay(this.dateService.today(), 0);
+    }
   }
+
+  getSuppliers(): void {
+    this.suppliersService.getsuppliers()
+      .subscribe(suppliers => {
+        this.suppliers = suppliers;
+      });
+  }
+
+  onSelectedSupplier(supplier: Supplier): void {
+    this.suppliersService.setSupplier(supplier);
+  }
+  
+  onPlaceOrder(form: NgForm) {
+    const value = form.value;
+console.log(value.selectedSupplier, value.quantity, value.unitPrice, value.ecd);
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    this.dateNow = yyyy + '-' + mm + '-' + dd;
+    this.order = new OrderEntryDTO(this.item.id.toString(), value.selectedSupplier.id, value.quantity, value.unitPrice, this.dateNow, value.ecd);
+    this.orderService.addNewOrderEntry(this.order);
+    this.suppliersService.setSupplier(value.selectedSupplier);
+console.log(this.suppliersService.getSupplier());
+    this.router.navigate(['/pages/order-entry-step-three'], {queryParams: {supplierId: value.selectedSupplier.id, itemId: this.item.id.toString()}});
+  }
+
+  // addDelay(orderId: string, pickedDate: string, delayReason: string): void {
+  //   if(delayReason === undefined) {
+  //     console.log('Please specify the delay reason.');
+  //   } else {
+  //     this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, true);
+  //     this.delayEntry = new DelayEntryDTO(orderId, delayReason);
+  //     this.ordersService.addOpenOrderCompletion(this.otd);
+  //     this.ordersService.addDelayEntry(this.delayEntry);
+  //     this.ordersService.setOpenOrder(null);
+  //     this.router.navigate(['/pages/open-order-completion-step-three'], {queryParams: {orderId: this.op.order_id}});
+  //   }
+  // }
+
+  // closeOpenOrder(orderId: string, pickedDate: string): void {
+  //   this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, false);
+  //   this.ordersService.addOpenOrderCompletion(this.otd);
+  //   this.ordersService.setOpenOrder(null);
+  //   this.router.navigate(['/pages/open-order-completion-step-three'], {queryParams: {orderId: this.op.order_id}});
+  // }
 
 }

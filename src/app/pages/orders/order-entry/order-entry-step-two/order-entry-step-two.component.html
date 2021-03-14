@@ -1,1 +1,62 @@
-<p>order-entry-step-two works!</p>
+<div *ngIf="itm;else other_content">
+    {{ itm.item_num }} | {{ itm.item_name }} | {{ itm.item_type }} | {{ itm.unit }}
+    <form (ngSubmit)="onPlaceOrder(f)" #f="ngForm">   
+        <div class="row">
+            <div class="col-lg-6">
+                <nb-card>
+                <nb-card-header>Please Select a Supplier</nb-card-header>
+                <nb-card-body>
+                    <nb-select [(selected)]="oneSupplier" name="selectedSupplier" ngModel placeholder="Select a Supplier" required>
+                        <nb-option *ngFor="let supplier of suppliers" [value]="supplier">{{ supplier.supplier_name }}</nb-option>
+                    </nb-select>
+                </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+        
+        <div *ngIf="oneSupplier">
+            <div class="col-lg-6">
+                <nb-card>
+                <nb-card-header>Enter a Price per Unit</nb-card-header>
+                <nb-card-body>
+                    <input type="number" step="0.01" min="0.01" nbInput fullWidth placeholder="Price per Unit" 
+                    name="unitPrice" ngModel required #up>
+                </nb-card-body>
+                </nb-card>
+                <div *ngIf="up.value > 0">
+                    <div class="col-lg-12">
+                        <nb-card>
+                            <nb-card-header>Enter the Quantity</nb-card-header>
+                            <nb-card-body>
+                                <input type="number" step="0.01" min="0.01" nbInput fullWidth placeholder="Quality" 
+                                name="quantity" ngModel required #qty>
+                            </nb-card-body>
+                        </nb-card>
+                        <div *ngIf="qty.value > 0" class="col-md-12 col-lg-12 col-xxxl-12">
+                            <nb-card>
+                                <nb-card-header>Select an Excpected Delivery Date</nb-card-header>
+                                <nb-card-body>
+                                    <input #promiseDate nbInput placeholder="Click Here to Pick a Date" [nbDatepicker]="picker"
+                                    name="ecd" ngModel required>
+                                    <nb-datepicker #picker [min]="min"></nb-datepicker>
+                                </nb-card-body>
+                            </nb-card>
+                            <div *ngIf="promiseDate.value | date: 'y-MM-dd' as formattedDate">
+                                <div class="form-group row">
+                                    <div class="offset-sm-3 col-sm-9">
+                                        <button type="submit" nbButton status="primary" [disabled]="!f.valid"> 
+                                        <!--     (click)="addQualityIssue(cp.order_id, qualityIssueType, formattedDate);"> -->
+                                        Place an Order
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form> 
+</div>
+
+<ng-template #other_content>No Data - Please Select an Item to Purchase at Step One</ng-template>

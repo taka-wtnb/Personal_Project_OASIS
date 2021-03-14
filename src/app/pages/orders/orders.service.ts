@@ -8,6 +8,7 @@ import { OpenOrder } from './open-order';
 import { DelayReason } from './delay-reason';
 import { OnTimeDeliveryDTO } from './on-time-delivery-dto';
 import { DelayEntryDTO } from './delay-entry-dto';
+import { OrderEntryDTO } from './order-entry-dto';
 
 
 @Injectable({
@@ -19,9 +20,11 @@ export class OrdersService {
   private openOrdersChanged = new Subject<OpenOrder[]>();
   private selectedOpenOrder: OpenOrder;
   private selectedOpenOrderChanged = new Subject<OpenOrder>();
+
   private delayReasons: DelayReason[] = [];
   private delayReasonsChanged = new Subject<DelayReason[]>();
 
+  private newOrderEntryUrl = 'https://quiet-reaches-22008.herokuapp.com/neworderentry/'; 
   private allOpenOrdersUrl = 'https://quiet-reaches-22008.herokuapp.com/allopenorders/'; 
   private delayReasonsUrl = 'https://quiet-reaches-22008.herokuapp.com/delayReasons/'; 
   private openOrderCompletionUrl = 'https://quiet-reaches-22008.herokuapp.com/openordercompletion/';
@@ -29,12 +32,16 @@ export class OrdersService {
 
   constructor(private http: HttpClient) { }
 
+  addNewOrderEntry(order: OrderEntryDTO) {
+    this.http.post(this.newOrderEntryUrl, order)
+      .subscribe(response => { console.log(response); });
+  }
+
   setOpenOrders(openOrders: OpenOrder[]) {
     this.openOrders = openOrders;
     this.openOrdersChanged.next(this.openOrders.slice());
   }
 
-  /** GET open orders from the server */
   getOpenOrders(): Observable<OpenOrder[]> {
     return this.http.get<OpenOrder[]>(this.allOpenOrdersUrl)
       .pipe(catchError(this.handleError<OpenOrder[]>('getAllOpenOrders', []))
