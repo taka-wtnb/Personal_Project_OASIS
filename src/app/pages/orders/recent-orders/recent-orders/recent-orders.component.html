@@ -1,4 +1,4 @@
-<h3>Recetnly Placed Orders</h3>
+<h3>Recently Placed Orders</h3>
 <div *ngIf="recentOrders?.length > 0;else other_content">
     <li *ngFor="let order of recentOrders" >
         {{ order.order_id }} | {{ order.supplier_code }} | {{ order.item_num }} | {{ order.item_name }} | 
@@ -7,4 +7,4 @@
     </li>
 </div>
 
-<ng-template #other_content>Currently, there are no recetnoy placed orders in the database.</ng-template>
+<ng-template #other_content>Currently, there are no recently placed orders in the database.</ng-template>

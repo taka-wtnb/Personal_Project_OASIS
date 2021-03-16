@@ -4,6 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { PriceIncreaseEntryDTO } from './price-increase-entry-dto';
 import { PriceIncreaseReason } from './price-increase-reason';
+import { RecentPriceIncrease } from './recent-price-increase';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,12 @@ export class PriceIncreaseService {
   private isPriceHigher: boolean;
   private isPriceHigherChanged = new Subject<boolean>();
 
+  private recentPriceIncrease: RecentPriceIncrease[] = [];
+  private recentPriceIncreaseChanged = new Subject<RecentPriceIncrease[]>(); 
+
   private priceChangeCategoriesUrl = 'https://quiet-reaches-22008.herokuapp.com/pricechangecategories/'; 
   private priceIncreaseEntryUrl = 'https://quiet-reaches-22008.herokuapp.com/priceincreaseentry/'; 
+  private recentPriceIncreaseUrl = 'https://quiet-reaches-22008.herokuapp.com/recentpriceincrease/';
 
   constructor(private http: HttpClient) { }
 
@@ -54,6 +59,17 @@ export class PriceIncreaseService {
   addPriceIncreaseEntry(priceIncreaseEntry: PriceIncreaseEntryDTO) {
     this.http.post(this.priceIncreaseEntryUrl, priceIncreaseEntry)
       .subscribe(response => { console.log(response); });
+  }
+
+  setRecentPriceIncrease(recentQualityIssues: RecentPriceIncrease[]) {
+    this.recentPriceIncrease = recentQualityIssues;
+    this.recentPriceIncreaseChanged.next(this.recentPriceIncrease.slice());
+  }
+
+  getRecentPriceIncrease(): Observable<RecentPriceIncrease[]> {
+    return this.http.get<RecentPriceIncrease[]>(this.recentPriceIncreaseUrl)
+      .pipe(catchError(this.handleError<RecentPriceIncrease[]>('getRecentPriceIncrease', []))
+      );
   }
 
   /**

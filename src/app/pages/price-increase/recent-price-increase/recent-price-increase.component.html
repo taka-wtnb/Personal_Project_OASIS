@@ -1,1 +1,9 @@
-<p>recent-price-increase works!</p>
+<h3>Recent Price Increase</h3>
+<div *ngIf="recentPriceIncrease?.length > 0;else other_content">
+    <li *ngFor="let increase of recentPriceIncrease" >
+        {{ increase.id }} | {{ increase.order_id }} | {{ increase.increase_reason_id }} | 
+        {{ increase.date_entered | date: 'MMM d, y' }} | {{ increase.note }}
+    </li>
+</div>
+
+<ng-template #other_content>Currently, there are no recent price increase cases in the database.</ng-template>

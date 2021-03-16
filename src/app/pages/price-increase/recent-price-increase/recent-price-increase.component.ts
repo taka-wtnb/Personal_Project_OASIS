@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PriceIncreaseService } from '../price-increase.service';
+import { RecentPriceIncrease } from '../recent-price-increase';
 
 @Component({
   selector: 'ngx-recent-price-increase',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentPriceIncreaseComponent implements OnInit {
 
-  constructor() { }
+  recentPriceIncrease: RecentPriceIncrease[] = [];
+
+  constructor(private priceIncreaseService: PriceIncreaseService) { }
 
   ngOnInit(): void {
+    this.getRecentPriceIncrease();
+  }
+
+  getRecentPriceIncrease(): void {
+    this.priceIncreaseService.getRecentPriceIncrease()
+      .subscribe(recentPriceIncrease => {
+        this.recentPriceIncrease = recentPriceIncrease;
+      });
   }
 
 }

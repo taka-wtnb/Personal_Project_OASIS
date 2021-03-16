@@ -23,6 +23,7 @@ import { QualityIssueClosingStepThreeComponent } from './quality-issues/quality-
 import { RecentOrdersComponent } from './orders/recent-orders/recent-orders/recent-orders.component';
 import { RecentPriceIncreaseComponent } from './price-increase/recent-price-increase/recent-price-increase.component';
 import { RecentQualityIssuesComponent } from './quality-issues/recent-quality-issues/recent-quality-issues.component';
+import { EntryHelperComponent } from './helpers/entry-helper/entry-helper.component';
 
 const routes: Routes = [{
   path: '',
@@ -107,6 +108,10 @@ const routes: Routes = [{
     {
       path: 'recent-quality-issues',
       component: RecentQualityIssuesComponent,
+    },
+    {
+      path: 'entry-helper',
+      component: EntryHelperComponent,
     },
     {
       path: 'layout',

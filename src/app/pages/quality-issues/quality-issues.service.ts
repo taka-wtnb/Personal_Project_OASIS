@@ -9,6 +9,7 @@ import { PendingQualityIssue } from './pending-quality-issue';
 import { QualityIssueClosingDTO } from './quality-issue-closing-dto';
 import { QualityIssueEntryDTO } from './quality-issue-entry-dto';
 import { QualityIssueCategory } from './quality-issue-category';
+import { RecentQualityIssue } from './recent-quality-issue';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,16 @@ export class QualityIssuesService {
   private selectedPendingQualityIssue: PendingQualityIssue;
   private selectedPendingQualityIssueChanged = new Subject<PendingQualityIssue>();
 
+  private recentQualityIssues: RecentQualityIssue[] = [];
+  private recentQualityIssuesChanged = new Subject<RecentQualityIssue[]>(); 
+
   private closedOrdersUrl = 'https://quiet-reaches-22008.herokuapp.com/closedorders/'; 
   private qualityIssueCategoriesUrl = 'https://quiet-reaches-22008.herokuapp.com/qualityissuecategories/'; 
   private qualityIssueEntryUrl = 'https://quiet-reaches-22008.herokuapp.com/qualityissueentry/';
   private pendingQualityIssuesUrl = 'https://quiet-reaches-22008.herokuapp.com/pendingqualityissues/'; 
   private qualityIssueClosingUrl = 'https://quiet-reaches-22008.herokuapp.com/qualityissueclosing/';
-  
+  private recentQualityIssuesUrl = 'https://quiet-reaches-22008.herokuapp.com/recentqualityissues/';
+
   constructor(private http: HttpClient) { }
   
   setClosedOrders(closedOrders: ClosedOrder[]) {
@@ -86,6 +91,17 @@ export class QualityIssuesService {
   updateQualityIssueEntry(qualityIssueClosing: QualityIssueClosingDTO) {
     this.http.put(this.qualityIssueClosingUrl, qualityIssueClosing)
     .subscribe(response => { console.log(response); });
+  }
+
+  setRecentQualityIssues(recentQualityIssues: RecentQualityIssue[]) {
+    this.recentQualityIssues = recentQualityIssues;
+    this.recentQualityIssuesChanged.next(this.recentQualityIssues.slice());
+  }
+
+  getRecentQualityIssues(): Observable<RecentQualityIssue[]> {
+    return this.http.get<RecentQualityIssue[]>(this.recentQualityIssuesUrl)
+      .pipe(catchError(this.handleError<RecentQualityIssue[]>('getRecentQualityIssues', []))
+      );
   }
 
   /**

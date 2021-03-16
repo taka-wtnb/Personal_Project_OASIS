@@ -1,1 +1,9 @@
-<p>recent-quality-issues works!</p>
+<h3>Recent Quality Issues</h3>
+<div *ngIf="recentQualityIssues?.length > 0;else other_content">
+    <li *ngFor="let issue of recentQualityIssues" >
+        {{ issue.id }} | {{ issue.supplier_id }} | {{ issue.order_id }} | 
+        {{ issue.category_id }} | {{ issue.date_detected | date: 'MMM d, y' }} | {{ issue.date_closed | date: 'MMM d, y' }}
+    </li>
+</div>
+
+<ng-template #other_content>Currently, there are no recent quality issue cases in the database.</ng-template>
