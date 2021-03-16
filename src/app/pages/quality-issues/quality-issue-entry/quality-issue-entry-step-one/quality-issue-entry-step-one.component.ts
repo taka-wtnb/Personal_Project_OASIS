@@ -20,8 +20,6 @@ export class QualityIssueEntryStepOneComponent implements OnInit {
     this.qualityIssuesService.getClosedOrders()
       .subscribe(closedOrders => {
         this.closedOrders = closedOrders;
-        console.log(this.closedOrders);
-        //this.orderService.setOpenOrders(this.openOrders);
       });
   }
 

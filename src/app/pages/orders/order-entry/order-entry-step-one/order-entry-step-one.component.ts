@@ -21,8 +21,6 @@ export class OrderEntryStepOneComponent implements OnInit {
     this.itemService.getItems()
       .subscribe(items => {
         this.items = items;
-        console.log(this.items);
-        //this.orderService.setOpenOrders(this.openOrders);
       });
   }
 

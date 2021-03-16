@@ -41,49 +41,7 @@ export class OrderEntryStepThreeComponent implements OnInit {
 
   ngOnInit(): void {
     this.isPriceHigher = localStorage.getItem('isPriceIncreased') == 'true' ? true : false;
-    // this.priceIncreaseService.getIsPriceHigher();
-//     this.unitPrice = this.route.snapshot.queryParamMap.get('unitPrice');
-//     this.itemId = this.route.snapshot.queryParamMap.get('itemId');
-//     this.supplierId = this.route.snapshot.queryParamMap.get('supplierId');
-
-//     this.params = new HttpParams()
-//       .set("itemId", this.itemId)
-//       .set("supplierId", this.supplierId); 
-    
-//     this.getRecentOrders(this.params);
-
-//     // check if there are two orders
-//     if(this.recentOrders.length >= 1) {
-//       // check if the new order's unit price is higher than the previous one
-//       if(this.unitPrice > this.recentOrders[0].unit_price) {
-//         // if so, set the flag, if not clear it
-//         this.isPriceHigher = this.priceIncreaseService.getIsPriceHigher();
-// console.log(this.isPriceHigher, this.unitPrice, this.recentOrders[0].unit_price);
-//         // if so, also get the price increase reasons
-//         this.getPriceIncreaseReasons();
-//       }
-//     }
-
-    // not here - clear the flag
-    // not here - clear the supplier
-    // not here - clear the item
   }
-
-  // getPriceIncreaseReasons(): void {
-  //   this.priceIncreaseService.getPriceChangeCategories()
-  //     .subscribe(priceChangeCategories => {
-  //       this.priceChangeCategories = priceChangeCategories;
-  //     });
-  // }
-
-  // getRecentOrders(params: HttpParams): void {
-  //   this.orderService.getTwoMostRecentOrdersByItemAndSupplier(params)
-  //     .subscribe(recentOrders => {
-  //       this.recentOrders = recentOrders;
-  //       console.log(this.recentOrders);
-  //       //this.orderService.setOpenOrders(this.openOrders);
-  //     });
-  // }
 
   goToStepFour() {
     this.router.navigateByUrl('/pages/order-entry-step-four');

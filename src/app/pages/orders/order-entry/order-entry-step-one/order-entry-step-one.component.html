@@ -3,7 +3,6 @@
     <li *ngFor="let item of items" >
         <button  [routerLink]="['../order-entry-step-two']" (click)="onSelectedItem(item)">Select</button>
         {{ item.item_num }} | {{ item.item_name }} | {{ item.item_type }} | {{ item.unit }}
-        <!-- <button  [routerLink]="['../open-order-completion-step-two', controlId ]">Receive</button> -->
     </li>
 </div>
 

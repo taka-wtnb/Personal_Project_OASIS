@@ -42,8 +42,6 @@ export class OrderEntryStepFiveComponent implements OnInit {
       .set("supplierId", this.supplier); 
       this.getRecentOrders(this.params);
     }
-
-    console.log(this.orderId);
   }
 
   getRecentOrders(params: HttpParams): void {

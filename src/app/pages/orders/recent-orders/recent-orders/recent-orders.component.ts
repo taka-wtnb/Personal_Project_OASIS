@@ -21,7 +21,6 @@ export class RecentOrdersComponent implements OnInit {
     this.orderService.getRecentOrders()
       .subscribe(recentOrders => {
         this.recentOrders = recentOrders;
-        console.log(this.recentOrders);
       });
   }
 

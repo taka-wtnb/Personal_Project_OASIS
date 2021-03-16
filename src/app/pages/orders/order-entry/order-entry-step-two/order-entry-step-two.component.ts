@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { NbDateService } from '@nebular/theme';
 import { Item } from '../../../items/item';
 import { ItemsService } from '../../../items/items.service';
-import { PriceIncreaseReason } from '../../../price-increase/price-increase-reason';
 import { PriceIncreaseService } from '../../../price-increase/price-increase.service';
 import { Supplier } from '../../../suppliers/supplier';
 import { SuppliersService } from '../../../suppliers/suppliers.service';
@@ -23,15 +22,8 @@ export class OrderEntryStepTwoComponent implements OnInit {
   itm: Item;
   id: number;
   min: Date;
-  // max: Date;
   suppliers: Supplier[] = [];
-  // supplier: Supplier;
-
-  // selectedItem;
-  // delayReasons: DelayReason[] = [];
-  // isDelayReasonUndefined: boolean = false;
   order: OrderEntryDTO;
-  // delayEntry: DelayEntryDTO;
   dateNow: string;
   params: any;
 
@@ -68,7 +60,6 @@ export class OrderEntryStepTwoComponent implements OnInit {
   
   onPlaceOrder(form: NgForm) {
     const value = form.value;
-console.log(value.selectedSupplier, value.quantity, value.unitPrice, value.ecd);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -89,40 +80,13 @@ console.log(value.selectedSupplier, value.quantity, value.unitPrice, value.ecd);
           localStorage.setItem('isPriceIncreased', 'true');
           this.orderService.addNewOrderEntry(this.order);
           this.router.navigate(['/pages/order-entry-step-three']);
-            //, {queryParams: {unitPrice: value.unitPrice, supplierId: value.selectedSupplier.id, itemId: this.item.id.toString()}});
           } else {
             this.priceIncreaseService.setIsPriceHigher(false);
             localStorage.setItem('isPriceIncreased', 'false');
             this.orderService.addNewOrderEntry(this.order);
             this.router.navigate(['/pages/order-entry-step-five']);
           }
-        //this.orderService.setOpenOrders(this.openOrders);
       });
-    // if(value.unitPrice > this.recentOrders[0].unit_price) {
-
-    // } else {
-
-    // }
   }
-
-  // addDelay(orderId: string, pickedDate: string, delayReason: string): void {
-  //   if(delayReason === undefined) {
-  //     console.log('Please specify the delay reason.');
-  //   } else {
-  //     this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, true);
-  //     this.delayEntry = new DelayEntryDTO(orderId, delayReason);
-  //     this.ordersService.addOpenOrderCompletion(this.otd);
-  //     this.ordersService.addDelayEntry(this.delayEntry);
-  //     this.ordersService.setOpenOrder(null);
-  //     this.router.navigate(['/pages/open-order-completion-step-three'], {queryParams: {orderId: this.op.order_id}});
-  //   }
-  // }
-
-  // closeOpenOrder(orderId: string, pickedDate: string): void {
-  //   this.otd = new OnTimeDeliveryDTO(orderId, pickedDate, false);
-  //   this.ordersService.addOpenOrderCompletion(this.otd);
-  //   this.ordersService.setOpenOrder(null);
-  //   this.router.navigate(['/pages/open-order-completion-step-three'], {queryParams: {orderId: this.op.order_id}});
-  // }
 
 }

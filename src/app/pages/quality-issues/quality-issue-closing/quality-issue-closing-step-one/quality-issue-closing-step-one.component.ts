@@ -20,8 +20,6 @@ export class QualityIssueClosingStepOneComponent implements OnInit {
     this.qualityIssuesService.getPendingQualityIssues()
       .subscribe(pendingQualityIssues => {
         this.pendingQualityIssues = pendingQualityIssues;
-        console.log(this.pendingQualityIssues);
-        //this.orderService.setOpenOrders(this.openOrders);
       });
   }
 

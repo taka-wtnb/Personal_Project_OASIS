@@ -86,7 +86,6 @@ export class OrderEntryStepFourComponent implements OnInit {
   }
 
   addPriceIncrease(reasonId: number) {
-console.log(this.recentOrders[0].order_id.toString(), reasonId.toString());
     if(reasonId === undefined) {
       console.log('Please specify the price increase reason.');
     } else {
