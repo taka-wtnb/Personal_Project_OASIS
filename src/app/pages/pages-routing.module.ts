@@ -9,6 +9,8 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { OrderEntryStepOneComponent } from './orders/order-entry/order-entry-step-one/order-entry-step-one.component';
 import { OrderEntryStepTwoComponent } from './orders/order-entry/order-entry-step-two/order-entry-step-two.component';
 import { OrderEntryStepThreeComponent } from './orders/order-entry/order-entry-step-three/order-entry-step-three.component';
+import { OrderEntryStepFourComponent } from './orders/order-entry/order-entry-step-four/order-entry-step-four.component';
+import { OrderEntryStepFiveComponent } from './orders/order-entry/order-entry-step-five/order-entry-step-five.component';
 import { OpenOrderCompletionStepOneComponent } from './orders/open-order-completion/open-order-completion-step-one/open-order-completion-step-one.component';
 import { OpenOrderCompletionStepTwoComponent } from './orders/open-order-completion/open-order-completion-step-two/open-order-completion-step-two.component';
 import { OpenOrderCompletionStepThreeComponent } from './orders/open-order-completion/open-order-completion-step-three/open-order-completion-step-three.component';
@@ -18,6 +20,9 @@ import { QualityIssueEntryStepThreeComponent } from './quality-issues/quality-is
 import { QualityIssueClosingStepOneComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-one/quality-issue-closing-step-one.component';
 import { QualityIssueClosingStepTwoComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-two/quality-issue-closing-step-two.component';
 import { QualityIssueClosingStepThreeComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-three/quality-issue-closing-step-three.component';
+import { RecentOrdersComponent } from './orders/recent-orders/recent-orders/recent-orders.component';
+import { RecentPriceIncreaseComponent } from './price-increase/recent-price-increase/recent-price-increase.component';
+import { RecentQualityIssuesComponent } from './quality-issues/recent-quality-issues/recent-quality-issues.component';
 
 const routes: Routes = [{
   path: '',
@@ -46,6 +51,14 @@ const routes: Routes = [{
     {
       path: 'order-entry-step-three',
       component: OrderEntryStepThreeComponent,
+    },
+    {
+      path: 'order-entry-step-four',
+      component: OrderEntryStepFourComponent,
+    },
+    {
+      path: 'order-entry-step-five',
+      component: OrderEntryStepFiveComponent,
     },
     {
       path: 'open-order-completion-step-one',
@@ -82,6 +95,18 @@ const routes: Routes = [{
     {
       path: 'quality-issue-closing-step-three',
       component: QualityIssueClosingStepThreeComponent,
+    },
+    {
+      path: 'recent-orders',
+      component: RecentOrdersComponent,
+    },
+    {
+      path: 'recent-price-increase',
+      component: RecentPriceIncreaseComponent,
+    },
+    {
+      path: 'recent-quality-issues',
+      component: RecentQualityIssuesComponent,
     },
     {
       path: 'layout',

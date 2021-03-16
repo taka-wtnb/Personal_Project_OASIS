@@ -1,0 +1,45 @@
+<div *ngIf="isPriceHigher;else other_content">
+    <li *ngFor="let order of recentOrders" >
+        {{ order.order_id }} | {{ order.supplier_code }} | {{ order.item_num }} | {{ order.item_name }} | 
+        {{ order.unit_price }} | {{ order.qty }} | {{ order.unit }} | 
+        {{ order.order_date | date: 'MMM d, y' }} | {{ order.promise_date | date: 'MMM d, y' }}
+    </li>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <nb-card>
+              <nb-card-header>Please Specify a Price Increase Reason</nb-card-header>
+              <nb-card-body>
+                <nb-select placeholder="Select a Price Increase Reason" [(selected)]="priceIncreaseReason">
+                  <nb-option *ngFor="let reason of priceChangeCategories" [value]="reason.id">{{ reason.reason }}</nb-option>
+                </nb-select>
+              </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+
+    <div *ngIf="priceIncreaseReason">
+        <!-- <div class="col-md-12 col-lg-4 col-xxxl-4">
+            <nb-card>
+              <nb-card-header>Select a Reporting Date</nb-card-header>
+              <nb-card-body>
+                <input #reportedDate nbInput placeholder="Click Here to Pick a Date" [nbDatepicker]="picker">
+                <nb-datepicker #picker [min]="min" [max]="max"></nb-datepicker>
+              </nb-card-body>
+            </nb-card>
+          </div> -->
+        <!-- <div *ngIf="reportedDate.value | date: 'y-MM-dd' as formattedDate"> -->
+        <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+                <button type="submit" nbButton status="primary" (click)="addPriceIncrease(priceIncreaseReason);">
+                    Submit the Price Increase Reason
+                </button>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+</div>
+
+<ng-template #other_content>
+    No Data for the Price Increase Reason Entry
+</ng-template>

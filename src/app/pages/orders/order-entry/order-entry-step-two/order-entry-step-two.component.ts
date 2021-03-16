@@ -1,9 +1,12 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbDateService } from '@nebular/theme';
 import { Item } from '../../../items/item';
 import { ItemsService } from '../../../items/items.service';
+import { PriceIncreaseReason } from '../../../price-increase/price-increase-reason';
+import { PriceIncreaseService } from '../../../price-increase/price-increase.service';
 import { Supplier } from '../../../suppliers/supplier';
 import { SuppliersService } from '../../../suppliers/suppliers.service';
 import { OrderEntryDTO } from '../../order-entry-dto';
@@ -30,11 +33,13 @@ export class OrderEntryStepTwoComponent implements OnInit {
   order: OrderEntryDTO;
   // delayEntry: DelayEntryDTO;
   dateNow: string;
+  params: any;
 
   constructor(
     private orderService: OrdersService,
     private itemsService: ItemsService,
     private suppliersService: SuppliersService,
+    private priceIncreaseService: PriceIncreaseService,
     protected dateService: NbDateService<Date>,
     private router: Router
   ) {}
@@ -46,8 +51,8 @@ export class OrderEntryStepTwoComponent implements OnInit {
       localStorage.setItem('itm', JSON.stringify(this.item));
       this.itm = JSON.parse(localStorage.getItem('itm'));
       this.min = this.dateService.addDay(new Date(), 0);
-      // this.max = this.dateService.addDay(this.dateService.today(), 0);
     }
+    localStorage.setItem('itemToBuy', this.item.id.toString());
   }
 
   getSuppliers(): void {
@@ -70,10 +75,34 @@ console.log(value.selectedSupplier, value.quantity, value.unitPrice, value.ecd);
     var yyyy = today.getFullYear();
     this.dateNow = yyyy + '-' + mm + '-' + dd;
     this.order = new OrderEntryDTO(this.item.id.toString(), value.selectedSupplier.id, value.quantity, value.unitPrice, this.dateNow, value.ecd);
-    this.orderService.addNewOrderEntry(this.order);
     this.suppliersService.setSupplier(value.selectedSupplier);
-console.log(this.suppliersService.getSupplier());
-    this.router.navigate(['/pages/order-entry-step-three'], {queryParams: {supplierId: value.selectedSupplier.id, itemId: this.item.id.toString()}});
+    localStorage.setItem('supplierToBuy', value.selectedSupplier.id);
+    
+    this.params = new HttpParams()
+      .set("itemId", this.item.id.toString())
+      .set("supplierId", value.selectedSupplier.id); 
+    
+    this.orderService.getTwoMostRecentOrdersByItemAndSupplier(this.params)
+      .subscribe(recentOrders => {
+        if( (recentOrders.length > 0) && (value.unitPrice > recentOrders[0].unit_price) ) {
+          this.priceIncreaseService.setIsPriceHigher(true);
+          localStorage.setItem('isPriceIncreased', 'true');
+          this.orderService.addNewOrderEntry(this.order);
+          this.router.navigate(['/pages/order-entry-step-three']);
+            //, {queryParams: {unitPrice: value.unitPrice, supplierId: value.selectedSupplier.id, itemId: this.item.id.toString()}});
+          } else {
+            this.priceIncreaseService.setIsPriceHigher(false);
+            localStorage.setItem('isPriceIncreased', 'false');
+            this.orderService.addNewOrderEntry(this.order);
+            this.router.navigate(['/pages/order-entry-step-five']);
+          }
+        //this.orderService.setOpenOrders(this.openOrders);
+      });
+    // if(value.unitPrice > this.recentOrders[0].unit_price) {
+
+    // } else {
+
+    // }
   }
 
   // addDelay(orderId: string, pickedDate: string, delayReason: string): void {

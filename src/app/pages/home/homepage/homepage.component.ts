@@ -31,4 +31,16 @@ export class HomepageComponent implements OnInit {
     this.router.navigateByUrl('/pages/quality-issue-closing-step-one');
   }
 
+  goToRecentOrders() {
+    this.router.navigateByUrl('/pages/recent-orders');
+  }
+
+  goToRecentPriceIncrease() {
+    this.router.navigateByUrl('/pages/recent-price-increase');
+  }
+
+  goToRecentQualityIssues() {
+    this.router.navigateByUrl('/pages/recent-quality-issues');
+  }
+
 }

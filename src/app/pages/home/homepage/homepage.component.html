@@ -5,16 +5,25 @@
           <h2 class="title">Main Menu</h2>
           <div class="flex-centered col-xl-5 col-lg-6 col-md-8 col-sm-12">
             <button nbButton fullWidth (click)="goToOrderEntry()" type="button" class="home-button">
-                Create and Place a New Purchase Order
+              Create and Place a New Purchase Order
             </button>
             <button nbButton fullWidth (click)="goToOpenOrderCompletion()" type="button" class="home-button">
-                Complete an Open Order
+              Complete an Open Order
             </button>
             <button nbButton fullWidth (click)="goToQualityIssueEntry()" type="button" class="home-button">
-                Report a Quality Issue
+              Report a Quality Issue
             </button>
             <button nbButton fullWidth (click)="goToQualityIssueClosing()" type="button" class="home-button">
-                Close a Quality Issue
+              Close a Quality Issue
+            </button>
+            <button nbButton fullWidth (click)="goToRecentOrders()" type="button" class="home-button">
+              View Recently Placed Purchase Orders
+            </button>
+            <button nbButton fullWidth (click)="goToRecentPriceIncrease()" type="button" class="home-button">
+              View Recent Price Increase Cases
+            </button>
+            <button nbButton fullWidth (click)="goToRecentQualityIssues()" type="button" class="home-button">
+              View Recent Quality Issue Cases
             </button>
           </div>
         </nb-card-body>

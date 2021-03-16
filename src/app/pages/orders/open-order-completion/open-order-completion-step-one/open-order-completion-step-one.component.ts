@@ -22,7 +22,6 @@ export class OpenOrderCompletionStepOneComponent implements OnInit {
       .subscribe(openOrders => {
         this.openOrders = openOrders;
         console.log(this.openOrders);
-        //this.orderService.setOpenOrders(this.openOrders);
       });
   }
 

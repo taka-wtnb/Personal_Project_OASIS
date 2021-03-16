@@ -1,0 +1,10 @@
+<h3>Recetnly Placed Orders</h3>
+<div *ngIf="recentOrders?.length > 0;else other_content">
+    <li *ngFor="let order of recentOrders" >
+        {{ order.order_id }} | {{ order.supplier_code }} | {{ order.item_num }} | {{ order.item_name }} | 
+        {{ order.unit_price }} | {{ order.qty }} | {{ order.unit }} | 
+        {{ order.order_date | date: 'MMM d, y' }} | {{ order.promise_date | date: 'MMM d, y' }}
+    </li>
+</div>
+
+<ng-template #other_content>Currently, there are no recetnoy placed orders in the database.</ng-template>

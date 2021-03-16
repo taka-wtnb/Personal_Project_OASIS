@@ -1,1 +1,21 @@
-<p>order-entry-step-three works!</p>
+<div *ngIf="isPriceHigher;else other_content">
+    <div class="row">
+        <div class="col-md-12">
+            <nb-card>
+                <nb-card-body>
+                    <h4 class="title">The Unit Price is Higher than the Previous Order's Unit Price!</h4>
+                    <h6 class="title">Click the Button Below and Provide the Price Increase Reason.</h6>
+                    <div class="flex-centered col-xl-5 col-lg-6 col-md-8 col-sm-12">
+                        <button nbButton fullWidth (click)="goToStepFour()" type="button" class="home-button">
+                            Enter the Increase Reason
+                        </button>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+</div>
+
+<ng-template #other_content>
+    <h2 class="title">No Data</h2>
+</ng-template>
