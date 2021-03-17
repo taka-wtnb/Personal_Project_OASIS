@@ -24,7 +24,8 @@ import { QualityIssueEntryStepThreeComponent } from './quality-issues/quality-is
 import { QualityIssueClosingStepOneComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-one/quality-issue-closing-step-one.component';
 import { QualityIssueClosingStepTwoComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-two/quality-issue-closing-step-two.component';
 import { QualityIssueClosingStepThreeComponent } from './quality-issues/quality-issue-closing/quality-issue-closing-step-three/quality-issue-closing-step-three.component';
-import { RecentOrdersComponent } from './orders/recent-orders/recent-orders/recent-orders.component';
+import { RecentOrdersComponent } from './orders/recent-orders/recent-orders.component';
+import { RecentDelaysComponent } from './orders/recent-delays/recent-delays.component';
 import { RecentPriceIncreaseComponent } from './price-increase/recent-price-increase/recent-price-increase.component';
 import { RecentQualityIssuesComponent } from './quality-issues/recent-quality-issues/recent-quality-issues.component';
 import { EntryHelperComponent } from './helpers/entry-helper/entry-helper.component';
@@ -76,6 +77,7 @@ import { EntryHelperComponent } from './helpers/entry-helper/entry-helper.compon
     RecentPriceIncreaseComponent,
     RecentQualityIssuesComponent,
     EntryHelperComponent,
+    RecentDelaysComponent,
   ],
 })
 export class PagesModule {

@@ -35,6 +35,10 @@ export class HomepageComponent implements OnInit {
     this.router.navigateByUrl('/pages/recent-orders');
   }
 
+  goToRecentDelays() {
+    this.router.navigateByUrl('/pages/recent-delays');
+  }
+
   goToRecentPriceIncrease() {
     this.router.navigateByUrl('/pages/recent-price-increase');
   }

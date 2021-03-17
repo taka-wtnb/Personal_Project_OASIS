@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from '../../orders.service';
-import { RecentOrder } from '../../recent-order';
+import { OrdersService } from '../orders.service';
+import { RecentOrder } from '../recent-order';
 
 @Component({
   selector: 'ngx-recent-orders',

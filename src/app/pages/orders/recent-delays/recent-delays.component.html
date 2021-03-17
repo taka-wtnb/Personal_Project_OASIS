@@ -1,0 +1,9 @@
+<h3>Recent Delays</h3>
+<div *ngIf="recentDelays?.length > 0;else other_content">
+    <li *ngFor="let delay of recentDelays" >
+        {{ delay.supplier_id }} | {{ delay.order_id }} | 
+        {{ delay.delay_reason_id }} | {{ delay.promise_date | date: 'MMM d, y' }}
+    </li>
+</div>
+
+<ng-template #other_content>Currently, there are no recent delay cases in the database.</ng-template>

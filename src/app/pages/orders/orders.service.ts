@@ -10,6 +10,7 @@ import { OnTimeDeliveryDTO } from './on-time-delivery-dto';
 import { DelayEntryDTO } from './delay-entry-dto';
 import { OrderEntryDTO } from './order-entry-dto';
 import { RecentOrder } from './recent-order';
+import { RecentDelay } from './recent-delay';
 
 
 @Injectable({
@@ -28,6 +29,9 @@ export class OrdersService {
   private recentOrders: RecentOrder[] = [];
   private recentOrdersChanged = new Subject<RecentOrder[]>(); 
 
+  private recentDelays: RecentDelay[] = [];
+  private recentDelaysChanged = new Subject<RecentDelay[]>(); 
+
   private newOrderEntryUrl = 'https://quiet-reaches-22008.herokuapp.com/neworderentry/'; 
   private twoMostRecentOrdersByItemAndSupplierUrl = 'https://quiet-reaches-22008.herokuapp.com/mostrecentorderbyitemandsupplier/'; 
   private allOpenOrdersUrl = 'https://quiet-reaches-22008.herokuapp.com/allopenorders/'; 
@@ -35,6 +39,7 @@ export class OrdersService {
   private openOrderCompletionUrl = 'https://quiet-reaches-22008.herokuapp.com/openordercompletion/';
   private delayEntryUrl = 'https://quiet-reaches-22008.herokuapp.com/delayentry/';
   private recentOrdersUrl = 'https://quiet-reaches-22008.herokuapp.com/thirtymostrecentorders/';
+  private recentDelaysUrl = 'https://quiet-reaches-22008.herokuapp.com/recentdelays/';
 
   constructor(private http: HttpClient) { }
 
@@ -101,6 +106,17 @@ export class OrdersService {
       );
   }
   
+  setRecentDelays(recentDelays: RecentDelay[]) {
+    this.recentDelays = recentDelays;
+    this.recentDelaysChanged.next(this.recentDelays.slice());
+  }
+
+  getRecentDelays(): Observable<RecentDelay[]> {
+    return this.http.get<RecentDelay[]>(this.recentDelaysUrl)
+      .pipe(catchError(this.handleError<RecentDelay[]>('getRecentDelays', []))
+      );
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
